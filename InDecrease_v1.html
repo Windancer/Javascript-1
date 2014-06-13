@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title></title>
+        
+        <link href="http://马赛克刮开可以看/Font-Awesome/Css/font-awesome.css" rel="stylesheet" />
+        <script src="http://马赛克刮开可以看/Jquery.js" type="text/javascript"></script>
+        <script src="http://马赛克刮开可以看/Jquery-ui.js" type="text/javascript"></script>
+    </head>
+    
+    <body>
+        <style>
+            .inDeCrease
+            {
+                background-color: #ededed;
+                border: 1px solid #ccc;
+                float: left;
+                height: 25px;
+            }
+            .inDeCrease i
+            {
+                font-size: 14px;
+                padding: 5px;
+                float: left;
+                line-height: 15px;
+                width: 20px;
+                text-align: center;
+            }
+            .inDeCrease .invalid
+            {
+                color: #ccc;
+                cursor: not-allowed;
+                background-color: #ededed;
+            }
+            .inDeCrease input
+            {
+                float: left;
+                border: 1px solid #ccc;
+                outline: 0;
+                background: #fff;
+                color: #666;
+                text-align: center;
+                font-size: 16px;
+                width: 48px;
+                height: 26px;
+            }
+        </style>
+        <script  type="text/javascript">
+         $(function () {
+         
+         function addInDeCrease(obj, name, num) {
+         
+             //创建DIV
+             $("#" + obj).append("<i class=\"icon icon-minus\"></i><input type=\"text\" name=\" " + name + "\" value=\"" + num + "\" /><i class=\"icon icon-plus\"></i>");
+             
+             function changeInputNum(obj, num) {
+                 var v = $("#" + obj + " input").val();
+                 v = parseInt(v, 10);
+                 v += num;
+                 if (v <= 0) {
+                     $("#" + obj + " .icon-minus").addClass("invalid");
+                     return;
+                 }
+                 else {
+                      $("#" + obj + " .icon-minus").removeClass("invalid");
+                 }
+                 $("#" + obj + " input").val(v);
+             }
+             $("#" + obj + " .icon-plus").click(function () {
+                 changeInputNum(obj, 1);
+             });
+             $("#" + obj + " .icon-minus").click(function () {
+             
+                 changeInputNum(obj, -1);
+             });
+             
+             $("#" + obj + " input").keyup(function () {
+                  $(this).val($(this).val().replace(/\D|^0/g,''));
+                  $(this).val(1);
+             });
+         
+         }
+             for (var i = 0; i < 100; i++) {
+                 $("body").append("<div class=\"inDeCrease\" id=\"inDeCrease" + i + "\"></div>");
+                 addInDeCrease("inDeCrease" + i,"test" + i,i);
+             }
+             
+         })
+        </script>
+    
+    </body>
+</html>
